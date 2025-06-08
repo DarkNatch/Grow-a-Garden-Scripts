@@ -20,7 +20,7 @@ local Features = {
     LoadingScreen = "https://raw.githubusercontent.com/DarkNatch/GaG-Script/main/LoadingScreen.lua",
     PetSpawner = "https://raw.githubusercontent.com/DarkNatch/GaG-Script/main/PetSpawner.lua",
     SeedSpawner = "https://raw.githubusercontent.com/DarkNatch/GaG-Script/main/SeedSpawner.lua",
-    EggDetector = "https://raw.githubusercontent.com/DarkNatch/GaG-Script/main/EggDetector.lua",
+    EggDetector = "https://github.com/DarkNatch/Grow-a-Garden-Scripts/blob/108a8186f1ee9e61ae13629049d34a052b01c31f/EggDetector.lua",
     ServerManager = "https://raw.githubusercontent.com/DarkNatch/GaG-Script/main/ServerManager.lua"
 }
 
