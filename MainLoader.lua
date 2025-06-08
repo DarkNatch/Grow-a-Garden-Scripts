@@ -1,58 +1,60 @@
--- Feature Config: Customize your features here
+-- MainLoader.lua
 local FeatureConfig = {
+    Key = "DarkNatchKey", -- set to nil to disable key system
     LoadingScreen = true,
 
     PetSpawner = {
         Enabled = true,
-        PetName = "Ex.Red Fox" -- Change to your pet name from RemoteSpy
+        PetName = "Dog"
     },
 
     SeedSpawner = {
         Enabled = true,
-        SeedName = "Ex.Mango" -- Change to your seed name from RemoteSpy
+        SeedName = "Wheat"
     },
 
     EggDetector = true,
     ServerManager = true
 }
 
+-- Key check
+if FeatureConfig.Key and _G.UserKey ~= FeatureConfig.Key then
+    return error("Invalid key. Access denied.")
+end
+
 local Features = {
-    LoadingScreen = "https://github.com/DarkNatch/Grow-a-Garden-Scripts/blob/78e1208056fed2270a85917bedb7c064474dc131/LoadingScreen.lua",
-    PetSpawner = "https://github.com/DarkNatch/Grow-a-Garden-Scripts/blob/78e1208056fed2270a85917bedb7c064474dc131/ServerMangaer.lua",
-    SeedSpawner = "https://github.com/DarkNatch/Grow-a-Garden-Scripts/blob/78e1208056fed2270a85917bedb7c064474dc131/SeedSpawner.lua",
-    EggDetector = "https://github.com/DarkNatch/Grow-a-Garden-Scripts/blob/108a8186f1ee9e61ae13629049d34a052b01c31f/EggDetector.lua",
-    ServerManager = "https://github.com/DarkNatch/Grow-a-Garden-Scripts/blob/78e1208056fed2270a85917bedb7c064474dc131/ServerMangaer.lua"
+    LoadingScreen = "https://raw.githubusercontent.com/DarkNatch/Grow-a-Garden-Scripts/refs/heads/main/LoadingScreen.lua",
+    PetSpawner    = "https://raw.githubusercontent.com/DarkNatch/Grow-a-Garden-Scripts/refs/heads/main/PetSpawner.lua",
+    SeedSpawner   = "https://raw.githubusercontent.com/DarkNatch/Grow-a-Garden-Scripts/refs/heads/main/SeedSpawner.lua",
+    EggDetector   = "https://raw.githubusercontent.com/DarkNatch/Grow-a-Garden-Scripts/refs/heads/main/EggDetector.lua",
+    ServerManager = "https://raw.githubusercontent.com/DarkNatch/Grow-a-Garden-Scripts/refs/heads/main/ServerMangaer.lua",
 }
 
 local function loadFeature(name, url)
     local success, err = pcall(function()
         loadstring(game:HttpGet(url))()
     end)
-    if success then
-        print("[DarkNatch] Loaded:", name)
+    if not success then
+        warn("[DarkNatch] Failed to load", name, ":", err)
     else
-        warn("[DarkNatch] Failed to load:", name, err)
+        print("[DarkNatch] Loaded", name)
     end
 end
 
 if FeatureConfig.LoadingScreen then
     loadFeature("LoadingScreen", Features.LoadingScreen)
 end
-
 if FeatureConfig.PetSpawner.Enabled then
     _G.PetName = FeatureConfig.PetSpawner.PetName
     loadFeature("PetSpawner", Features.PetSpawner)
 end
-
 if FeatureConfig.SeedSpawner.Enabled then
     _G.SeedName = FeatureConfig.SeedSpawner.SeedName
     loadFeature("SeedSpawner", Features.SeedSpawner)
 end
-
 if FeatureConfig.EggDetector then
     loadFeature("EggDetector", Features.EggDetector)
 end
-
 if FeatureConfig.ServerManager then
     loadFeature("ServerManager", Features.ServerManager)
 end
